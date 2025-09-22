@@ -354,7 +354,7 @@ With this new loss function, the training did not converge stably using a large,
 Therefore, I attempted to use Armijo Line Search to find an adaptive step size.
 
 <div align="center">
-<img src="./Optimal_Sigmoid/armijo rule.png" alt="Armijo Rule" height="400"/>
+<img src="./Optimal_Sigmoid/Armijo Rule.png" alt="Armijo Rule" height="400"/>
 </div>
 
 > See [Lecture 3: Steepest and Gradient Descent-Part I/Instructor: Dimitrios Katselis](https://katselis.web.engr.illinois.edu/ECE586/Lecture3.pdf).
