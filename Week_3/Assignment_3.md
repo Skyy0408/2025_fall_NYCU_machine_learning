@@ -1,4 +1,83 @@
 # Written Assignment
+## Question 1: What is a shallow $\tanh$ neural network?
+A shallow $\tanh$ neural network can be seen as a weighted combination of multiple $\tanh$ functions, like $$\displaystyle\sum_i c_i\cdot\tanh(w_ix+b_i)$$
+Now, we are going to show that we can use $\tanh$ to approximate any continuous function we want.
+
+However, it is quite difficult to start with an arbitrary function.
+
+Fortunately, we have Weierstrass Approximation Theorem:
+> ### Weierstrass Approximation Theorem:
+> Suppose $f$ is a continuous real-valued function defined on the real interval $[a, b]$. For every $ε > 0$, there exists a polynomial $p$ such that for all $x$ in $[a, b]$, we have $|f(x) − p(x)| < \varepsilon $, or equivalently, the supremum norm $\|f − p\| < \varepsilon$.
+
+It is a useful theorem, which usually is usually proven in Advanced Calculus, states that any function can be approximated by a polynomial as close as we want.
+
+Thus, the problem is transformed into the problem of proving $\tanh$ can approximate any polynomial.
+
+Let's start from monomials.
+
+## Question 2: How to approximate $x$?
+
+Recall that the Maclaurin Series of a function $f\in\mathcal{C}^\infty$ is $$f(t)=f(0)+f'(0)t+\dfrac{f''(0)}{2!}t^2+\dfrac{f'''(0)}{3!}t^3+\cdots =\displaystyle\sum_{i=0}^\infty \dfrac{f^{(i)}(0)}{i!}t^i\text{\qquad, where }f^{(0)}(0):=f(0).$$
+
+For $\sigma=\tanh$, an odd function, its Maclaurin Series only has odd-powered terms:
+$$\sigma(t)=\sigma'(0)t+\dfrac{\sigma^{(3)}(0)}{3!}t^3+\dfrac{\sigma^{(5)}(0)}{5!}+\cdots$$
+
+$$\begin{array}{rl}\text{Consider }&\left\{\begin{array}{ccc}\sigma\left(\dfrac{hx}{2}\right)&=&\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\\[10pt] \sigma\left(-\dfrac{hx}{2}\right)&=&-\sigma'(0)\left(\dfrac{hx}{2}\right)-\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3-\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\end{array}\right.\\[30pt] \Longrightarrow & \sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)=2\left(\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma'''(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\cdots\right)=\sigma'(0)\left(hx\right)+O(h^3)\\[10pt]\Longrightarrow &x=\dfrac{\sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)}{\sigma'(0)h}+O(h^2)\end{array}$$
+That is, we can approximate $x$ with $\dfrac{\sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)}{\sigma'(0)h}$ with an error term $O(h^2)$.
+
+Additionally, it is a linear combination with only $2$ $\tanh$ functions, which is easy to compute for shallow neural network.
+
+Furthermore, $O(h^2)$ can be controlled by $h$, in other words, we can approximate as closely as we want with a sufficiently small $h$.
+
+## Question 3: How about $x^3$, $x^5$, etc.?
+### Order Central Finite Difference
+
+Observe that $f'(t)=\displaystyle\lim_{h\to 0}\dfrac{f\left(t+h\right)-f\left(t\right)}{h}=\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}\qquad\cdots(*)$
+
+Also, for $$\begin{array}{ccl}f'''(t)&=&\displaystyle\lim_{h\to 0}\dfrac{f''\left(t+\frac{h}{2}\right)-f''\left(t-\frac{h}{2}\right)}{h}\\[15pt] &=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f'\left(t+h\right)-f'\left(t\right)}{h}-\dfrac{f'\left(t\right)-f'\left(t-h\right)}{h}}{h}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f'(t+h)-2f(t)+f'(t-h)}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f\left(t+\frac{3h}{2}\right)-f\left(t+\frac{h}{2}\right)}{h}-2\cdot \dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}+\dfrac{f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h}}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{3h}{2}\right)-3f\left(t+\frac{h}{2}\right)+3f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h^3}\end{array}$$ by extending $(*)$ to $f^{(n+1)}(t)=\displaystyle\lim_{h\to 0}\dfrac{f^{(n)}\left(t+\frac{h}{2}\right)-f^{(n)}\left(t-\frac{h}{2}\right)}{h}, \forall n\in\N$.
+
+For $x^3$, 
+$$\begin{array}{rl}\text{Consider }&\left\{\begin{array}{ccccccccc}\sigma\left(\dfrac{3hx}{2}\right)&=&\sigma'(0)\left(\dfrac{3hx}{2}\right)&+&\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{3hx}{2}\right)^3&+&\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{3hx}{2}\right)^5&+&\cdots\\[10pt]\sigma\left(\dfrac{hx}{2}\right)&=&\sigma'(0)\left(\dfrac{hx}{2}\right)&+&\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3&+&\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^5&+&\cdots\\[10pt] \sigma\left(-\dfrac{hx}{2}\right)&=&-\sigma'(0)\left(\dfrac{hx}{2}\right)&-&\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3&-&\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^5&-&\cdots\\[10pt]\sigma\left(-\dfrac{3hx}{2}\right)&=&-\sigma'(0)\left(\dfrac{3hx}{2}\right)&-&\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{3hx}{2}\right)^3&-&\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{3hx}{2}\right)^5&-&\cdots\end{array}\right.\\[60pt] \Longrightarrow & \sigma\left(\dfrac{3hx}{2}\right)-3\sigma\left(\dfrac{hx}{2}\right)+3\sigma\left(-\dfrac{hx}{2}\right)-\sigma\left(\dfrac{3hx}{2}\right)=-\dfrac{48}{6}\sigma^{(3)}(0)\left(\dfrac{hx}{2}\right)^3+O(h^5)=-\sigma^{(3)}(0)\left(hx\right)^3+O(h^5)\\[10pt]\Longrightarrow &x^3=\dfrac{-\left(\sigma\left(\dfrac{3hx}{2}\right)-3\sigma\left(\dfrac{hx}{2}\right)+3\sigma\left(-\dfrac{hx}{2}\right)-\sigma\left(\dfrac{3hx}{2}\right)\right)}{\sigma^{(3)}(0)h^3}+O(h^2)\end{array}$$
+
+Again, we can approximate $x^3$ by $4$ $\tanh$ functions as closely as we want with a sufficiently small $h$.
+
+Denote $\delta_h^p[f](t):=\displaystyle\sum_{i=0}^p(-1)^i\begin{pmatrix}p\\i\end{pmatrix}f\left(t+\left(\dfrac{p}{2}-i\right)h\right)$, which is the general form of the  numerator.
+
+This leads to the general approximation with $p+1$ $\tanh$ functions for odd powers p: $$x^p\approx \dfrac{\delta_{hx}^p[\sigma](0)}{\sigma^{(p)}(0)h^p}$$
+
+## Question 4: Furthermore, how about $x^2, x^4, $ etc.?
+We can skip the $x^0$ term, since it can be matched by the network's bias term, $b$.
+
+Observe that $$(x+\alpha)^3-(x-\alpha)^3=(x^3+3\alpha x^2+3\alpha^2 x+\alpha^3)-(x^3-3\alpha x^2+3\alpha^2 x-\alpha^3)=6\alpha x^2+2\alpha^3.$$
+
+Then, solving for $x^2$ gives: $$x^2 = \frac{(x+\alpha)^3 - (x-\alpha)^3 - 2\alpha^3}{6\alpha}$$By applying our previous approximation for cubic terms, this becomes:$$x^2 \approx \frac{ \frac{\delta_{h(x+\alpha)}^3[\sigma](0)}{\sigma^{(3)}(0)h^3} - \frac{\delta_{h(x-\alpha)}^3[\sigma](0)}{\sigma^{(3)}(0)h^3} - 2\alpha^3 }{6\alpha}$$
+
+For $x^4$, by $$\begin{array}{rcl}(x+\alpha)^5-(x-\alpha)^5&=&\displaystyle\sum_{i=0}^5\begin{pmatrix}5\\i\end{pmatrix}x^{5-i}\alpha^i-\sum_{i=0}^5\begin{pmatrix}5\\i\end{pmatrix}x^{5-i}(-\alpha)^i\\[20pt]&=&2\displaystyle\sum_{i\text{:odd}, i\leq 5}\begin{pmatrix}5\\i\end{pmatrix}x^{5-i}\alpha^i\\[20pt]&=&2\left(\begin{pmatrix}5\\1\end{pmatrix}x^4\alpha+\begin{pmatrix}5\\3\end{pmatrix}x^2\alpha^3+\begin{pmatrix}5\\5\end{pmatrix}\alpha^5\right)\\[20pt]&=&2\left(5x^4\alpha+\begin{pmatrix}5\\3\end{pmatrix}x^2\alpha^3+\begin{pmatrix}5\\5\end{pmatrix}\alpha^5\right)\end{array}$$
+Similarly, we can solve for $x^4$: $$x^4 = \frac{1}{10\alpha}\left((x+\alpha)^5-(x-\alpha)^5-2\binom{5}{3}x^2\alpha^3-2\binom{5}{5}\alpha^5\right)$$
+
+This process can be generalized into a recursive formula:
+$$\begin{array}{ccl}x^{2n}&=&\dfrac{1}{2\alpha(2n+1)}\left((x+\alpha)^{2n+1}-(x-\alpha)^{2n+1}-2\displaystyle\sum_{k=0}^{n-1}\begin{pmatrix}2n+1\\2n+1-2k\end{pmatrix}x^{2k}\alpha^{2n+1-2k}\right)\\[10pt]&=&\dfrac{1}{2\alpha(2n+1)}\left((x+\alpha)^{2n+1}-(x-\alpha)^{2n+1}-2\displaystyle\sum_{k=0}^{n-1}\begin{pmatrix}2n+1\\2k\end{pmatrix}x^{2k}\alpha^{2(n-k)+1}\right)\end{array}$$
+
+## Let's see Lemmas
+
+
+> ### Lemma 3.1 
+> Let $k\in\N_0$ and $s\in 2\N-1$. Then it holds that for all $\varepsilon>0$, there exists a shallow $\tanh$ neural network $\psi_{s,\varepsilon}:[-M,M]\to\R^{\frac{s+1}{2}}$ of width $\dfrac{s+1}{2}$ such that $$\max_{p\leq s,\ p\text{: odd}}\left\|f_p-(\psi_{s,\varepsilon})_{\frac{p+1}{2}}\right\|_{W^{k,\infty}}\leq\varepsilon.$$
+> Moreover, the weights of $\psi_{s,\varepsilon}$ scale as $O\left(\varepsilon^{-\frac{s}{2}}(2(s+2)\sqrt{2M})^{s(s+3)}\right)$ for small $\varepsilon$ and large $s$.
+
+The phrase "For all $\varepsilon > 0$" means that no matter how small an error tolerance ($\varepsilon$) we desire, we can always find a corresponding neural network ($\psi_{s,\varepsilon}$) that meets this accuracy requirement.
+
+The function ψ_{s,ε} represents the neural network that approximates the monomial. Its core structure is built upon the central finite difference formula, which approximates $x^p$ using a specific combination of tanh functions: $$\dfrac{\delta_{hx}^p[\sigma](0)}{\sigma^{(p)}(0)h^p}$$
+
+The "width" of the network refers to the number of neurons($\tanh$ functions) in its hidden layer.
+
+> ### Lemma 3.2
+> Let $k\in\N_0$ and $s\in 2\N-1$ and $M>0$. For every $\varepsilon>0$, there exists a shallow $\tanh$ neural network $\psi_{s,\varepsilon}:[-M,M]\to\R^s$ of width $\dfrac{3(s+1)}{2}$ such that $$\max_{p\leq s}\left\|f_p-(\psi_{s,\varepsilon})_p\right\|_{W^{k,\infty}}\leq \varepsilon.$$
+> Furthermore, the weghts scale as $O\left(\varepsilon^{-\frac{s}{2}}(\sqrt{M}(s+2))^{3\frac{s(s+3)}{2}}\right)$ for small $\varepsilon$ and large $s$.
+
+Again, ε represents the desired error tolerance between the target monomial and our neural network's approximation.
+Moreover, we have $$\psi_{s,\varepsilon}=\dfrac{1}{2\alpha(2n+1)}\left(\frac{\delta_{h(x+\alpha)}^{2n+1}[\sigma](0)}{\sigma^{(2n+1)}(0)h^{2n+1}} - \frac{\delta_{h(x-\alpha)}^{2n+1}[\sigma](0)}{\sigma^{(2n+1)}(0)h^{2n+1}}-2\displaystyle\sum_{k=0}^{n-1}\begin{pmatrix}2n+1\\2k\end{pmatrix}x^{2k}\alpha^{2(n-k)+1}\right)$$
+
 # Programming Assignment
 > 1. Use the same code from Assignment 2 to calculate the error in approximating the derivative of the given function.
 
