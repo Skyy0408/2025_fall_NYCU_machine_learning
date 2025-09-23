@@ -29,6 +29,7 @@ For $\sigma=\tanh$, an odd function, its Maclaurin Series only has odd-powered t
 $$\sigma(t)=\sigma'(0)t+\dfrac{\sigma^{(3)}(0)}{3!}t^3+\dfrac{\sigma^{(5)}(0)}{5!}+\cdots$$
 
 $$\begin{array}{rl}\text{Consider }&\left\{\begin{array}{ccc}\sigma\left(\dfrac{hx}{2}\right)&=&\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\\[10pt] \sigma\left(-\dfrac{hx}{2}\right)&=&-\sigma'(0)\left(\dfrac{hx}{2}\right)-\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3-\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\end{array}\right.\\[30pt] \Longrightarrow & \sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)=2\left(\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma'''(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\cdots\right)=\sigma'(0)\left(hx\right)+O(h^3)\\[10pt]\Longrightarrow &x=\dfrac{\sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)}{\sigma'(0)h}+O(h^2)\end{array}$$
+
 That is, we can approximate $x$ with $\dfrac{\sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)}{\sigma'(0)h}$ with an error term $O(h^2)$.
 
 Additionally, it is a linear combination with only $2$ $\tanh$ functions, which is easy to compute for shallow neural network.
@@ -40,7 +41,11 @@ Furthermore, $O(h^2)$ can be controlled by $h$, in other words, we can approxima
 
 Observe that $f'(t)=\displaystyle\lim_{h\to 0}\dfrac{f\left(t+h\right)-f\left(t\right)}{h}=\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}\qquad\cdots(*)$
 
-Also, for $$\begin{array}{ccl}f'''(t)&=&\displaystyle\lim_{h\to 0}\dfrac{f''\left(t+\frac{h}{2}\right)-f''\left(t-\frac{h}{2}\right)}{h}\\[15pt] &=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f'\left(t+h\right)-f'\left(t\right)}{h}-\dfrac{f'\left(t\right)-f'\left(t-h\right)}{h}}{h}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f'(t+h)-2f(t)+f'(t-h)}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f\left(t+\frac{3h}{2}\right)-f\left(t+\frac{h}{2}\right)}{h}-2\cdot \dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}+\dfrac{f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h}}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{3h}{2}\right)-3f\left(t+\frac{h}{2}\right)+3f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h^3}\end{array}$$ by extending $(*)$ to $f^{(n+1)}(t)=\displaystyle\lim_{h\to 0}\dfrac{f^{(n)}\left(t+\frac{h}{2}\right)-f^{(n)}\left(t-\frac{h}{2}\right)}{h}, \forall n\in\N$.
+Also, for 
+
+$$\begin{array}{ccl}f'''(t)&=&\displaystyle\lim_{h\to 0}\dfrac{f''\left(t+\frac{h}{2}\right)-f''\left(t-\frac{h}{2}\right)}{h}\\[15pt] &=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f'\left(t+h\right)-f'\left(t\right)}{h}-\dfrac{f'\left(t\right)-f'\left(t-h\right)}{h}}{h}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f'(t+h)-2f(t)+f'(t-h)}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f\left(t+\frac{3h}{2}\right)-f\left(t+\frac{h}{2}\right)}{h}-2\cdot \dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}+\dfrac{f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h}}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{3h}{2}\right)-3f\left(t+\frac{h}{2}\right)+3f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h^3}\end{array}$$ 
+
+by extending $(*)$ to $f^{(n+1)}(t)=\displaystyle\lim_{h\to 0}\dfrac{f^{(n)}\left(t+\frac{h}{2}\right)-f^{(n)}\left(t-\frac{h}{2}\right)}{h}, \forall n\in\mathbb{N}$.
 
 For $x^3$, 
 
