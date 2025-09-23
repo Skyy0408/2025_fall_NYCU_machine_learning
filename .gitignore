@@ -8,6 +8,4 @@
 venv/
 
 # Specific files in Week_3 to ignore
-Week_3/Derivative(Optimal).py
-Week_3/Finally.py
-"Week_3/without optax.py"
+Week_3/.ipynb_checkpoints
