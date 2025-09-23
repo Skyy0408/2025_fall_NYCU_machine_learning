@@ -26,9 +26,13 @@ $$f(t)=f(0)+f'(0)t+\dfrac{f''(0)}{2!}t^2+\dfrac{f'''(0)}{3!}t^3+\cdots =\display
 
 For $\sigma=\tanh$, an odd function, its Maclaurin Series only has odd-powered terms:
 
-$$\sigma(t)=\sigma'(0)t+\dfrac{\sigma^{(3)}(0)}{3!}t^3+\dfrac{\sigma^{(5)}(0)}{5!}+\cdots$$
+$$
+\sigma(t)=\sigma'(0)t+\dfrac{\sigma^{(3)}(0)}{3!}t^3+\dfrac{\sigma^{(5)}(0)}{5!}+\cdots
+$$
 
-$$\begin{array}{rl}\text{Consider }&\left\{\begin{array}{ccc}\sigma\left(\dfrac{hx}{2}\right)&=&\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\\[10pt] \sigma\left(-\dfrac{hx}{2}\right)&=&-\sigma'(0)\left(\dfrac{hx}{2}\right)-\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3-\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\end{array}\right.\\[30pt] \Longrightarrow & \sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)=2\left(\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma'''(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\cdots\right)=\sigma'(0)\left(hx\right)+O(h^3)\\[10pt]\Longrightarrow &x=\dfrac{\sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)}{\sigma'(0)h}+O(h^2)\end{array}$$
+$$
+\begin{array}{rl}\text{Consider }&\left\{\begin{array}{ccc}\sigma\left(\dfrac{hx}{2}\right)&=&\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\\[10pt] \sigma\left(-\dfrac{hx}{2}\right)&=&-\sigma'(0)\left(\dfrac{hx}{2}\right)-\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3-\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\end{array}\right.\\[30pt] \Longrightarrow & \sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)=2\left(\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma'''(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\cdots\right)=\sigma'(0)\left(hx\right)+O(h^3)\\[10pt]\Longrightarrow &x=\dfrac{\sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)}{\sigma'(0)h}+O(h^2)\end{array}
+$$
 
 That is, we can approximate $x$ with $\dfrac{\sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)}{\sigma'(0)h}$ with an error term $O(h^2)$.
 
@@ -79,7 +83,7 @@ $$\begin{array}{ccl}x^{2n}&=&\dfrac{1}{2\alpha(2n+1)}\left((x+\alpha)^{2n+1}-(x-
 
 The phrase "For all $\varepsilon > 0$" means that no matter how small an error tolerance ($\varepsilon$) we desire, we can always find a corresponding neural network ($\psi_{s,\varepsilon}$) that meets this accuracy requirement.
 
-The function ψ_{s,ε} represents the neural network that approximates the monomial. Its core structure is built upon the central finite difference formula, which approximates $x^p$ using a specific combination of tanh functions: 
+The function $\psi_{s,\varepsilon}$ represents the neural network that approximates the monomial. Its core structure is built upon the central finite difference formula, which approximates $x^p$ using a specific combination of tanh functions: 
 
 $$\dfrac{\delta_{hx}^p[\sigma](0)}{\sigma^{(p)}(0)h^p}$$
 
