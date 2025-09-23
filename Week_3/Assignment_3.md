@@ -1,6 +1,9 @@
 # Written Assignment
 ## Question 1: What is a shallow $\tanh$ neural network?
-A shallow $\tanh$ neural network can be seen as a weighted combination of multiple $\tanh$ functions, like $$\displaystyle\sum_i c_i\cdot\tanh(w_ix+b_i)$$
+A shallow $\tanh$ neural network can be seen as a weighted combination of multiple $\tanh$ functions, like 
+
+$$\displaystyle\sum_i c_i\cdot\tanh(w_ix+b_i)$$
+
 Now, we are going to show that we can use $\tanh$ to approximate any continuous function we want.
 
 However, it is quite difficult to start with an arbitrary function.
@@ -17,9 +20,12 @@ Let's start from monomials.
 
 ## Question 2: How to approximate $x$?
 
-Recall that the Maclaurin Series of a function $f\in\mathcal{C}^\infty$ is $$f(t)=f(0)+f'(0)t+\dfrac{f''(0)}{2!}t^2+\dfrac{f'''(0)}{3!}t^3+\cdots =\displaystyle\sum_{i=0}^\infty \dfrac{f^{(i)}(0)}{i!}t^i\text{\qquad, where }f^{(0)}(0):=f(0).$$
+Recall that the Maclaurin Series of a function $f\in\mathcal{C}^\infty$ is 
+
+$$f(t)=f(0)+f'(0)t+\dfrac{f''(0)}{2!}t^2+\dfrac{f'''(0)}{3!}t^3+\cdots =\displaystyle\sum_{i=0}^\infty \dfrac{f^{(i)}(0)}{i!}t^i\text{\qquad, where }f^{(0)}(0):=f(0).$$
 
 For $\sigma=\tanh$, an odd function, its Maclaurin Series only has odd-powered terms:
+
 $$\sigma(t)=\sigma'(0)t+\dfrac{\sigma^{(3)}(0)}{3!}t^3+\dfrac{\sigma^{(5)}(0)}{5!}+\cdots$$
 
 $$\begin{array}{rl}\text{Consider }&\left\{\begin{array}{ccc}\sigma\left(\dfrac{hx}{2}\right)&=&\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\\[10pt] \sigma\left(-\dfrac{hx}{2}\right)&=&-\sigma'(0)\left(\dfrac{hx}{2}\right)-\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3-\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^3\cdots\end{array}\right.\\[30pt] \Longrightarrow & \sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)=2\left(\sigma'(0)\left(\dfrac{hx}{2}\right)+\dfrac{\sigma'''(0)}{3!}\left(\dfrac{hx}{2}\right)^3+\cdots\right)=\sigma'(0)\left(hx\right)+O(h^3)\\[10pt]\Longrightarrow &x=\dfrac{\sigma\left(\dfrac{hx}{2}\right)-\sigma\left(-\dfrac{hx}{2}\right)}{\sigma'(0)h}+O(h^2)\end{array}$$
