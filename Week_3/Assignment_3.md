@@ -41,11 +41,8 @@ Furthermore, $O(h^2)$ can be controlled by $h$, in other words, we can approxima
 
 Observe that $f'(t)=\displaystyle\lim_{h\to 0}\dfrac{f\left(t+h\right)-f\left(t\right)}{h}=\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}\qquad\cdots(*)$
 
-Also, for 
-
-$$\begin{array}{ccl}f'''(t)&=&\displaystyle\lim_{h\to 0}\dfrac{f''\left(t+\frac{h}{2}\right)-f''\left(t-\frac{h}{2}\right)}{h}\\[15pt] &=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f'\left(t+h\right)-f'\left(t\right)}{h}-\dfrac{f'\left(t\right)-f'\left(t-h\right)}{h}}{h}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f'(t+h)-2f(t)+f'(t-h)}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f\left(t+\frac{3h}{2}\right)-f\left(t+\frac{h}{2}\right)}{h}-2\cdot \dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}+\dfrac{f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h}}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{3h}{2}\right)-3f\left(t+\frac{h}{2}\right)+3f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h^3}\end{array}$$ 
-
-by extending $(*)$ to $f^{(n+1)}(t)=\displaystyle\lim_{h\to 0}\dfrac{f^{(n)}\left(t+\frac{h}{2}\right)-f^{(n)}\left(t-\frac{h}{2}\right)}{h}, \forall n\in\mathbb{N}$.
+Also, for $$\begin{array}{ccl}f'''(t)&=&\displaystyle\lim_{h\to 0}\dfrac{f''\left(t+\frac{h}{2}\right)-f''\left(t-\frac{h}{2}\right)}{h}\\[15pt] &=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f'\left(t+h\right)-f'\left(t\right)}{h}-\dfrac{f'\left(t\right)-f'\left(t-h\right)}{h}}{h}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f'(t+h)-2f(t)+f'(t-h)}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f\left(t+\frac{3h}{2}\right)-f\left(t+\frac{h}{2}\right)}{h}-2\cdot \dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}+\dfrac{f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h}}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{3h}{2}\right)-3f\left(t+\frac{h}{2}\right)+3f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h^3}\end{array}$$
+by extending $(*)$ to $f^{(n+1)}(t)=\displaystyle\lim_{h\to 0}\dfrac{f^{(n)}\left(t+\frac{h}{2}\right)-f^{(n)}\left(t-\frac{h}{2}\right)}{h}, \forall n\in\N$.
 
 For $x^3$, 
 
