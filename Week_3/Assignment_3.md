@@ -54,7 +54,7 @@ Furthermore, $O(h^2)$ can be controlled by $h$, in other words, we can approxima
 Observe that $f'(t)=\displaystyle\lim_{h\to 0}\dfrac{f\left(t+h\right)-f\left(t\right)}{h}=\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}\qquad\cdots(*)$
 
 Also, for $$\begin{array}{ccl}f'''(t)&=&\displaystyle\lim_{h\to 0}\dfrac{f''\left(t+\frac{h}{2}\right)-f''\left(t-\frac{h}{2}\right)}{h}\\[15pt] &=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f'\left(t+h\right)-f'\left(t\right)}{h}-\dfrac{f'\left(t\right)-f'\left(t-h\right)}{h}}{h}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f'(t+h)-2f(t)+f'(t-h)}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f\left(t+\frac{3h}{2}\right)-f\left(t+\frac{h}{2}\right)}{h}-2\cdot \dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}+\dfrac{f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h}}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{3h}{2}\right)-3f\left(t+\frac{h}{2}\right)+3f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h^3}\end{array}$$
-by extending $(*)$ to $f^{(n+1)}(t)=\displaystyle\lim_{h\to 0}\dfrac{f^{(n)}\left(t+\frac{h}{2}\right)-f^{(n)}\left(t-\frac{h}{2}\right)}{h}, \forall n\in\N$.
+by extending $(*)$ to $f^{(n+1)}(t)=\displaystyle\lim_{h\to 0}\dfrac{f^{(n)}\left(t+\frac{h}{2}\right)-f^{(n)}\left(t-\frac{h}{2}\right)}{h}, \forall n\in\mathbb{N}$.
 
 For $x^3$, 
 
@@ -86,7 +86,7 @@ $$\begin{array}{ccl}x^{2n}&=&\dfrac{1}{2\alpha(2n+1)}\left((x+\alpha)^{2n+1}-(x-
 
 
 > ### Lemma 3.1 
-> Let $k\in\N_0$ and $s\in 2\N-1$. Then it holds that for all $\varepsilon>0$, there exists a shallow $\tanh$ neural network $\psi_{s,\varepsilon}:[-M,M]\to\R^{\frac{s+1}{2}}$ of width $\dfrac{s+1}{2}$ such that $$\max_{p\leq s,\ p\text{: odd}}\left\|f_p-(\psi_{s,\varepsilon})_{\frac{p+1}{2}}\right\|_{W^{k,\infty}}\leq\varepsilon.$$
+> Let $k\in\mathbb{N}_0$ and $s\in 2\mathbb{N}-1$. Then it holds that for all $\varepsilon>0$, there exists a shallow $\tanh$ neural network $\psi_{s,\varepsilon}:[-M,M]\to\mathbb{R}^{\frac{s+1}{2}}$ of width $\dfrac{s+1}{2}$ such that $$\max_{p\leq s,\ p\text{: odd}}\left\|f_p-(\psi_{s,\varepsilon})_{\frac{p+1}{2}}\right\|_{W^{k,\infty}}\leq\varepsilon.$$
 > Moreover, the weights of $\psi_{s,\varepsilon}$ scale as $O\left(\varepsilon^{-\frac{s}{2}}(2(s+2)\sqrt{2M})^{s(s+3)}\right)$ for small $\varepsilon$ and large $s$.
 
 The phrase "For all $\varepsilon > 0$" means that no matter how small an error tolerance ($\varepsilon$) we desire, we can always find a corresponding neural network ($\psi_{s,\varepsilon}$) that meets this accuracy requirement.
@@ -98,7 +98,7 @@ $$\dfrac{\delta_{hx}^p[\sigma](0)}{\sigma^{(p)}(0)h^p}$$
 The "width" of the network refers to the number of neurons($\tanh$ functions) in its hidden layer.
 
 > ### Lemma 3.2
-> Let $k\in\N_0$ and $s\in 2\N-1$ and $M>0$. For every $\varepsilon>0$, there exists a shallow $\tanh$ neural network $\psi_{s,\varepsilon}:[-M,M]\to\R^s$ of width $\dfrac{3(s+1)}{2}$ such that $$\max_{p\leq s}\left\|f_p-(\psi_{s,\varepsilon})_p\right\|_{W^{k,\infty}}\leq \varepsilon.$$
+> Let $k\in\mathbb{N}_0$ and $s\in 2\mathbb{N}-1$ and $M>0$. For every $\varepsilon>0$, there exists a shallow $\tanh$ neural network $\psi_{s,\varepsilon}:[-M,M]\to\mathbb{R}^s$ of width $\dfrac{3(s+1)}{2}$ such that $$\max_{p\leq s}\left\|f_p-(\psi_{s,\varepsilon})_p\right\|_{W^{k,\infty}}\leq \varepsilon.$$
 > Furthermore, the weghts scale as $O\left(\varepsilon^{-\frac{s}{2}}(\sqrt{M}(s+2))^{3\frac{s(s+3)}{2}}\right)$ for small $\varepsilon$ and large $s$.
 
 Again, ε represents the desired error tolerance between the target monomial and our neural network's approximation.
