@@ -43,13 +43,16 @@ Observe that $f'(t)=\displaystyle\lim_{h\to 0}\dfrac{f\left(t+h\right)-f\left(t\
 Also, for $$\begin{array}{ccl}f'''(t)&=&\displaystyle\lim_{h\to 0}\dfrac{f''\left(t+\frac{h}{2}\right)-f''\left(t-\frac{h}{2}\right)}{h}\\[15pt] &=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f'\left(t+h\right)-f'\left(t\right)}{h}-\dfrac{f'\left(t\right)-f'\left(t-h\right)}{h}}{h}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f'(t+h)-2f(t)+f'(t-h)}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{\dfrac{f\left(t+\frac{3h}{2}\right)-f\left(t+\frac{h}{2}\right)}{h}-2\cdot \dfrac{f\left(t+\frac{h}{2}\right)-f\left(t-\frac{h}{2}\right)}{h}+\dfrac{f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h}}{h^2}\\[15pt]&=&\displaystyle\lim_{h\to 0}\dfrac{f\left(t+\frac{3h}{2}\right)-3f\left(t+\frac{h}{2}\right)+3f\left(t-\frac{h}{2}\right)-f\left(t-\frac{3h}{2}\right)}{h^3}\end{array}$$ by extending $(*)$ to $f^{(n+1)}(t)=\displaystyle\lim_{h\to 0}\dfrac{f^{(n)}\left(t+\frac{h}{2}\right)-f^{(n)}\left(t-\frac{h}{2}\right)}{h}, \forall n\in\N$.
 
 For $x^3$, 
+
 $$\begin{array}{rl}\text{Consider }&\left\{\begin{array}{ccccccccc}\sigma\left(\dfrac{3hx}{2}\right)&=&\sigma'(0)\left(\dfrac{3hx}{2}\right)&+&\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{3hx}{2}\right)^3&+&\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{3hx}{2}\right)^5&+&\cdots\\[10pt]\sigma\left(\dfrac{hx}{2}\right)&=&\sigma'(0)\left(\dfrac{hx}{2}\right)&+&\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3&+&\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^5&+&\cdots\\[10pt] \sigma\left(-\dfrac{hx}{2}\right)&=&-\sigma'(0)\left(\dfrac{hx}{2}\right)&-&\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{hx}{2}\right)^3&-&\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{hx}{2}\right)^5&-&\cdots\\[10pt]\sigma\left(-\dfrac{3hx}{2}\right)&=&-\sigma'(0)\left(\dfrac{3hx}{2}\right)&-&\dfrac{\sigma^{(3)}(0)}{3!}\left(\dfrac{3hx}{2}\right)^3&-&\dfrac{\sigma^{(5)}(0)}{5!}\left(\dfrac{3hx}{2}\right)^5&-&\cdots\end{array}\right.\\[60pt] \Longrightarrow & \sigma\left(\dfrac{3hx}{2}\right)-3\sigma\left(\dfrac{hx}{2}\right)+3\sigma\left(-\dfrac{hx}{2}\right)-\sigma\left(\dfrac{3hx}{2}\right)=-\dfrac{48}{6}\sigma^{(3)}(0)\left(\dfrac{hx}{2}\right)^3+O(h^5)=-\sigma^{(3)}(0)\left(hx\right)^3+O(h^5)\\[10pt]\Longrightarrow &x^3=\dfrac{-\left(\sigma\left(\dfrac{3hx}{2}\right)-3\sigma\left(\dfrac{hx}{2}\right)+3\sigma\left(-\dfrac{hx}{2}\right)-\sigma\left(\dfrac{3hx}{2}\right)\right)}{\sigma^{(3)}(0)h^3}+O(h^2)\end{array}$$
 
 Again, we can approximate $x^3$ by $4$ $\tanh$ functions as closely as we want with a sufficiently small $h$.
 
 Denote $\delta_h^p[f](t):=\displaystyle\sum_{i=0}^p(-1)^i\begin{pmatrix}p\\i\end{pmatrix}f\left(t+\left(\dfrac{p}{2}-i\right)h\right)$, which is the general form of the  numerator.
 
-This leads to the general approximation with $p+1$ $\tanh$ functions for odd powers p: $$x^p\approx \dfrac{\delta_{hx}^p[\sigma](0)}{\sigma^{(p)}(0)h^p}$$
+This leads to the general approximation with $p+1$ $\tanh$ functions for odd powers p: 
+
+$$x^p\approx \dfrac{\delta_{hx}^p[\sigma](0)}{\sigma^{(p)}(0)h^p}$$
 
 ## Question 4: Furthermore, how about $x^2, x^4, $ etc.?
 We can skip the $x^0$ term, since it can be matched by the network's bias term, $b$.
@@ -62,6 +65,7 @@ For $x^4$, by $$\begin{array}{rcl}(x+\alpha)^5-(x-\alpha)^5&=&\displaystyle\sum_
 Similarly, we can solve for $x^4$: $$x^4 = \frac{1}{10\alpha}\left((x+\alpha)^5-(x-\alpha)^5-2\binom{5}{3}x^2\alpha^3-2\binom{5}{5}\alpha^5\right)$$
 
 This process can be generalized into a recursive formula:
+
 $$\begin{array}{ccl}x^{2n}&=&\dfrac{1}{2\alpha(2n+1)}\left((x+\alpha)^{2n+1}-(x-\alpha)^{2n+1}-2\displaystyle\sum_{k=0}^{n-1}\begin{pmatrix}2n+1\\2n+1-2k\end{pmatrix}x^{2k}\alpha^{2n+1-2k}\right)\\[10pt]&=&\dfrac{1}{2\alpha(2n+1)}\left((x+\alpha)^{2n+1}-(x-\alpha)^{2n+1}-2\displaystyle\sum_{k=0}^{n-1}\begin{pmatrix}2n+1\\2k\end{pmatrix}x^{2k}\alpha^{2(n-k)+1}\right)\end{array}$$
 
 ## Let's see Lemmas
@@ -73,7 +77,9 @@ $$\begin{array}{ccl}x^{2n}&=&\dfrac{1}{2\alpha(2n+1)}\left((x+\alpha)^{2n+1}-(x-
 
 The phrase "For all $\varepsilon > 0$" means that no matter how small an error tolerance ($\varepsilon$) we desire, we can always find a corresponding neural network ($\psi_{s,\varepsilon}$) that meets this accuracy requirement.
 
-The function ψ_{s,ε} represents the neural network that approximates the monomial. Its core structure is built upon the central finite difference formula, which approximates $x^p$ using a specific combination of tanh functions: $$\dfrac{\delta_{hx}^p[\sigma](0)}{\sigma^{(p)}(0)h^p}$$
+The function ψ_{s,ε} represents the neural network that approximates the monomial. Its core structure is built upon the central finite difference formula, which approximates $x^p$ using a specific combination of tanh functions: 
+
+$$\dfrac{\delta_{hx}^p[\sigma](0)}{\sigma^{(p)}(0)h^p}$$
 
 The "width" of the network refers to the number of neurons($\tanh$ functions) in its hidden layer.
 
@@ -82,7 +88,9 @@ The "width" of the network refers to the number of neurons($\tanh$ functions) in
 > Furthermore, the weghts scale as $O\left(\varepsilon^{-\frac{s}{2}}(\sqrt{M}(s+2))^{3\frac{s(s+3)}{2}}\right)$ for small $\varepsilon$ and large $s$.
 
 Again, ε represents the desired error tolerance between the target monomial and our neural network's approximation.
-Moreover, we have $$\psi_{s,\varepsilon}=\dfrac{1}{2\alpha(2n+1)}\left(\frac{\delta_{h(x+\alpha)}^{2n+1}[\sigma](0)}{\sigma^{(2n+1)}(0)h^{2n+1}} - \frac{\delta_{h(x-\alpha)}^{2n+1}[\sigma](0)}{\sigma^{(2n+1)}(0)h^{2n+1}}-2\displaystyle\sum_{k=0}^{n-1}\begin{pmatrix}2n+1\\2k\end{pmatrix}x^{2k}\alpha^{2(n-k)+1}\right)$$
+Moreover, we have 
+
+$$\psi_{s,\varepsilon}=\dfrac{1}{2\alpha(2n+1)}\left(\frac{\delta_{h(x+\alpha)}^{2n+1}[\sigma](0)}{\sigma^{(2n+1)}(0)h^{2n+1}} - \frac{\delta_{h(x-\alpha)}^{2n+1}[\sigma](0)}{\sigma^{(2n+1)}(0)h^{2n+1}}-2\displaystyle\sum_{k=0}^{n-1}\begin{pmatrix}2n+1\\2k\end{pmatrix}x^{2k}\alpha^{2(n-k)+1}\right)$$
 
 # Programming Assignment
 > 1. Use the same code from Assignment 2 to calculate the error in approximating the derivative of the given function.
